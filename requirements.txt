@@ -1,0 +1,5 @@
+transformers>=4.40.0
+torch>=2.2.0  # ou tensorflow si tu préfères, mais torch est plus universel
+sentencepiece  # utile pour certains modèles type T5 ou Marian
+accelerate     # pour la compatibilité device (CPU/GPU)
+rich           # pour jolis prints dans le terminal
