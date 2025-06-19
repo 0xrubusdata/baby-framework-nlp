@@ -24,9 +24,9 @@ TASKS_CONFIG = {
         "parameters": {
             "text_input": {
                 "type": "textbox",
-                "label": "Texte à analyser",
-                "placeholder": "Entrez votre texte ici...",
-                "max_chars": 500
+                "label": "Tweet à analyser",
+                "placeholder": "Entrez votre tweet ici... (max 280 caractères)",
+                "max_chars": 280
             }
         },
         "output_format": "sentiment_scores"
@@ -50,15 +50,15 @@ TASKS_CONFIG = {
         "parameters": {
             "text_input": {
                 "type": "textbox",
-                "label": "Prompt de départ",
-                "placeholder": "Il était une fois...",
-                "max_chars": 200
+                "label": "Début du tweet",
+                "placeholder": "Just landed in Paris and...",
+                "max_chars": 140
             },
             "max_length": {
                 "type": "slider",
-                "label": "Longueur maximale",
+                "label": "Longueur du tweet généré",
                 "minimum": 10,
-                "maximum": 200,
+                "maximum": 100,
                 "default": 50
             },
             "temperature": {
@@ -129,34 +129,29 @@ TASKS_CONFIG = {
     },
     
     "summarization": {
-        "display_name": "Résumé de texte",
-        "description": "Génère un résumé concis d'un texte long",
+        "display_name": "Résumé de thread Twitter",
+        "description": "Résume une série de tweets ou une conversation Twitter",
         "models": [
             {
-                "name": "facebook/bart-large-cnn",
-                "display_name": "BART CNN",
-                "description": "Excellent pour résumer des articles"
-            },
-            {
                 "name": "t5-small",
-                "display_name": "T5 Small", 
-                "description": "Plus léger, bon compromis vitesse/qualité"
+                "display_name": "T5 Small (Recommandé)", 
+                "description": "Léger et efficace pour des textes courts"
             }
         ],
         "parameters": {
             "text_input": {
                 "type": "textbox",
-                "label": "Texte à résumer",
-                "placeholder": "Collez votre texte long ici...",
-                "max_chars": 2000,
-                "lines": 8
+                "label": "Thread/Conversation Twitter à résumer",
+                "placeholder": "Collez plusieurs tweets séparés par des retours à la ligne...",
+                "max_chars": 1000,
+                "lines": 6
             },
             "max_length": {
                 "type": "slider",
                 "label": "Longueur max du résumé", 
-                "minimum": 30,
-                "maximum": 200,
-                "default": 100
+                "minimum": 20,
+                "maximum": 100,
+                "default": 50
             }
         },
         "output_format": "summary_text"
