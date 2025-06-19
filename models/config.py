@@ -162,3 +162,28 @@ TASKS_CONFIG = {
         "output_format": "summary_text"
     }
 }
+
+# Fonction utilitaire pour récupérer les informations d'une tâche
+def get_task_info(task_name):
+    """Retourne les informations complètes d'une tâche."""
+    return TASKS_CONFIG.get(task_name, None)
+
+def get_available_tasks():
+    """Retourne la liste des tâches disponibles."""
+    return list(TASKS_CONFIG.keys())
+
+def get_models_for_task(task_name):
+    """Retourne les modèles disponibles pour une tâche donnée."""
+    task_info = get_task_info(task_name)
+    if task_info:
+        return [model["name"] for model in task_info["models"]]
+    return []
+
+def get_model_info(task_name, model_name):
+    """Retourne les informations détaillées d'un modèle."""
+    task_info = get_task_info(task_name)
+    if task_info:
+        for model in task_info["models"]:
+            if model["name"] == model_name:
+                return model
+    return None
