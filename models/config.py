@@ -1,69 +1,69 @@
 # models/config.py
 """
-Configuration centralisée pour les tâches NLP et leurs modèles associés.
-Cette approche permet une maintenance facile et une extensibilité claire.
+Centralized configuration for NLP tasks and their associated models.
+This approach allows for easy maintenance and clear extensibility.
 """
 
-# Configuration principale des tâches NLP
+# Main configuration for NLP tasks
 TASKS_CONFIG = {
     "sentiment-analysis": {
-        "display_name": "Analyse de sentiment",
-        "description": "Détermine si un texte exprime un sentiment positif, négatif ou neutre",
+        "display_name": "Sentiment Analysis",
+        "description": "Determines if a text expresses a positive, negative, or neutral sentiment",
         "models": [
             {
                 "name": "cardiffnlp/twitter-roberta-base-sentiment-latest",
-                "display_name": "RoBERTa Twitter (Recommandé)",
-                "description": "Optimisé pour les textes courts, réseaux sociaux"
+                "display_name": "RoBERTa Twitter (Recommended)",
+                "description": "Optimized for short texts, social media"
             },
             {
-                "name": "nlptown/bert-base-multilingual-uncased-sentiment", 
+                "name": "nlptown/bert-base-multilingual-uncased-sentiment",
                 "display_name": "BERT Multilingual",
-                "description": "Support multilingue, bon pour textes formels"
+                "description": "Multilingual support, good for formal texts"
             }
         ],
         "parameters": {
             "text_input": {
                 "type": "textbox",
-                "label": "Tweet à analyser",
-                "placeholder": "Entrez votre tweet ici... (max 280 caractères)",
+                "label": "Tweet to analyze",
+                "placeholder": "Enter your tweet here... (max 280 characters)",
                 "max_chars": 280
             }
         },
         "output_format": "sentiment_scores"
     },
-    
+
     "text-generation": {
-        "display_name": "Génération de texte", 
-        "description": "Génère du texte à partir d'un prompt initial",
+        "display_name": "Text Generation",
+        "description": "Generates text from an initial prompt",
         "models": [
             {
                 "name": "gpt2",
-                "display_name": "GPT-2 (Léger)",
-                "description": "Rapide, bon pour débuter"
+                "display_name": "GPT-2 (Lightweight)",
+                "description": "Fast, good for getting started"
             },
             {
                 "name": "microsoft/DialoGPT-medium",
-                "display_name": "DialoGPT Medium", 
-                "description": "Spécialisé dans les conversations"
+                "display_name": "DialoGPT Medium",
+                "description": "Specialized in conversations"
             }
         ],
         "parameters": {
             "text_input": {
                 "type": "textbox",
-                "label": "Début du tweet",
+                "label": "Start of tweet",
                 "placeholder": "Just landed in Paris and...",
                 "max_chars": 140
             },
             "max_length": {
                 "type": "slider",
-                "label": "Longueur du tweet généré",
+                "label": "Generated tweet length",
                 "minimum": 10,
                 "maximum": 100,
                 "default": 50
             },
             "temperature": {
-                "type": "slider", 
-                "label": "Créativité (Temperature)",
+                "type": "slider",
+                "label": "Creativity (Temperature)",
                 "minimum": 0.1,
                 "maximum": 2.0,
                 "default": 1.0,
@@ -72,83 +72,83 @@ TASKS_CONFIG = {
         },
         "output_format": "generated_text"
     },
-    
+
     "question-answering": {
-        "display_name": "Questions-Réponses",
-        "description": "Répond à une question basée sur un contexte fourni", 
+        "display_name": "Question Answering",
+        "description": "Answers a question based on a provided context",
         "models": [
             {
                 "name": "distilbert-base-cased-distilled-squad",
                 "display_name": "DistilBERT SQuAD",
-                "description": "Rapide et efficace, entraîné sur SQuAD"
+                "description": "Fast and efficient, trained on SQuAD"
             }
         ],
         "parameters": {
             "context": {
                 "type": "textbox",
-                "label": "Contexte/Passage",
-                "placeholder": "Collez ici le texte contenant l'information...",
+                "label": "Context/Passage",
+                "placeholder": "Paste the text containing the information here...",
                 "max_chars": 1000,
                 "lines": 5
             },
             "question": {
-                "type": "textbox", 
+                "type": "textbox",
                 "label": "Question",
-                "placeholder": "Quelle est votre question ?",
+                "placeholder": "What is your question?",
                 "max_chars": 200
             }
         },
         "output_format": "qa_result"
     },
-    
+
     "zero-shot-classification": {
-        "display_name": "Classification Zero-Shot",
-        "description": "Classifie un texte selon des catégories définies par l'utilisateur",
+        "display_name": "Zero-Shot Classification",
+        "description": "Classifies text according to user-defined categories",
         "models": [
             {
-                "name": "facebook/bart-large-mnli", 
+                "name": "facebook/bart-large-mnli",
                 "display_name": "BART Large MNLI",
-                "description": "Performant pour la classification sans entraînement"
+                "description": "Performs well for classification without training"
             }
         ],
         "parameters": {
             "text_input": {
                 "type": "textbox",
-                "label": "Texte à classifier", 
-                "placeholder": "Texte à analyser...",
+                "label": "Text to classify",
+                "placeholder": "Text to analyze...",
                 "max_chars": 500
             },
             "candidate_labels": {
                 "type": "textbox",
-                "label": "Labels possibles (séparés par des virgules)",
-                "placeholder": "politique, sport, technologie, divertissement",
+                "label": "Possible labels (comma-separated)",
+                "placeholder": "politics, sport, technology, entertainment",
                 "max_chars": 200
             }
         },
         "output_format": "classification_scores"
     },
-    
+
     "summarization": {
-        "display_name": "Résumé de thread Twitter",
-        "description": "Résume une série de tweets ou une conversation Twitter",
+        "display_name": "Twitter Thread Summarization",
+        "description": "Summarizes a series of tweets or a Twitter conversation",
         "models": [
             {
                 "name": "t5-small",
-                "display_name": "T5 Small (Recommandé)", 
-                "description": "Léger et efficace pour des textes courts"
+                "display_name": "T5 Small (Recommended)",
+                "description": "Lightweight and efficient for short texts"
             }
         ],
         "parameters": {
             "text_input": {
                 "type": "textbox",
-                "label": "Thread/Conversation Twitter à résumer",
-                "placeholder": "Collez plusieurs tweets séparés par des retours à la ligne...",
+                "label": "Twitter thread/conversation to summarize",
+                "placeholder": "Paste multiple tweets separated by newlines...",
                 "max_chars": 1000,
                 "lines": 6
             },
             "max_length": {
                 "type": "slider",
-                "label": "Longueur max du résumé", 
+                "label": "Max summary length",
                 "minimum": 20,
                 "maximum": 100,
                 "default": 50
@@ -158,24 +158,24 @@ TASKS_CONFIG = {
     }
 }
 
-# Fonction utilitaire pour récupérer les informations d'une tâche
+# Utility function to retrieve task information
 def get_task_info(task_name):
-    """Retourne les informations complètes d'une tâche."""
+    """Returns complete information for a task."""
     return TASKS_CONFIG.get(task_name, None)
 
 def get_available_tasks():
-    """Retourne la liste des tâches disponibles."""
+    """Returns a list of available tasks."""
     return list(TASKS_CONFIG.keys())
 
 def get_models_for_task(task_name):
-    """Retourne les modèles disponibles pour une tâche donnée."""
+    """Returns available models for a given task."""
     task_info = get_task_info(task_name)
     if task_info:
         return [model["name"] for model in task_info["models"]]
     return []
 
 def get_model_info(task_name, model_name):
-    """Retourne les informations détaillées d'un modèle."""
+    """Returns detailed information for a model."""
     task_info = get_task_info(task_name)
     if task_info:
         for model in task_info["models"]:
